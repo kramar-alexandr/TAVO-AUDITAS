@@ -1,0 +1,89 @@
+external inner procedure IVDchsum(var record IVVc,Integer);
+external inner procedure IVSumup(var record IVVc,Boolean);
+external inner function Boolean IVDchrsum(var record IVVc,Integer);
+external inner procedure VICalcVals(var record VIVc);
+external inner procedure VISumup(record VIVc,var val);
+
+global
+updating procedure BPIImportIVVcIn()
+begin
+  record IVVc IVr;
+  row IVVc IVrw;
+  record CrVIImportSetBlock CIb;
+  integer rwcnt,i;
+  
+  blockload(CIb);
+  
+  while (NextImportLine(false)) begin
+
+    RecordNew(IVr);
+    ImportOneRecord(IVr,"IVVc");
+    logtext(0,IVr.SerNr);
+    if(IVr.Sum4<0)then begin
+    	if(nonblank(CIb.DefPayDeal))then begin
+    		IVr.PayDeal = CIb.DefPayDeal;
+    		rwcnt = matrowcnt(IVr);
+    		For(i=0;i<rwcnt;i=i+1) begin
+	  			matrowget(IVr,i,IVrw);
+	  			if(IVrw.stp==kInvoiceRowTypeNormal)then begin
+						if(IVrw.Quant<0)then begin
+							IVrw.Quant = -IVrw.Quant;
+							matrowput(IVr,i,IVrw);
+							if (IVDchrsum(IVr,i)) then begin
+								IVDchsum(IVr,i);
+							end;
+						end;
+	  			end;
+				end; 
+				IVSumup(IVr,true);
+    	end;
+    end;
+    if(IVr.SerNr==-99)then begin
+			if (RecordImportStore(IVr,false)) then begin end;
+    end;
+  end;    
+  
+  return;
+end;
+
+global
+updating procedure BPIImportVIVcIn()
+begin
+  record VIVc VIr;
+  row VIVc VIrw;
+  record CrVIImportSetBlock CIb;
+  integer rwcnt,i;
+  val ct;
+  
+  blockload(CIb);
+
+  while (NextImportLine(false)) begin
+
+    RecordNew(VIr);
+    ImportOneRecord(VIr,"VIVc3");
+    logtext(0,VIr.PayVal);
+    if(VIr.PayVal<0)then begin
+    	if(nonblank(CIb.VIDefPayDeal))then begin
+    		VIr.PayDeal = CIb.VIDefPayDeal;
+    		rwcnt = matrowcnt(VIr);
+    		For(i=0;i<rwcnt;i=i+1) begin
+	  			matrowget(VIr,i,VIrw);
+	  			if(VIrw.stp==kInvoiceRowTypeNormal)then begin
+						if(VIrw.Sum<0)then begin
+							VIrw.Sum = -VIrw.Sum;
+							matrowput(VIr,i,VIrw);
+							VICalcVals(VIr);
+							VISumup(VIr,ct);  
+						end;
+	  			end;
+				end; 
+				VIr.PayVal = -VIr.PayVal;
+    	end;
+    end;
+    if(VIr.SerNr==-99)then begin
+			if (RecordImportStore(VIr,false)) then begin end;
+    end;
+  end;    
+  
+  return;
+end;

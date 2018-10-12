@@ -1,0 +1,38 @@
+SetLangMode(LangLithuanian,"LIT",0);
+
+window CrVIImportSetTClass:1// Edit ************************** BPI Ukraine - KramarAlexandr - Friday, 12 October 2018 15:49:26
+  wtag("language","LIT"), wtag("product","*"), wtag("productcode","*"), wtag("device","computer")
+begin
+  real h,v,vm,vs;
+  v = 6; vs = 20; h = 90;
+
+  WindowBegin("TAVO - Purchase Invoices Import Setting",CrVIImportSetTClass,CGSbl,-);
+  SetWRect(20,80,400,480);
+  SetBlid(CrVIImportSetBlock);
+  Sizeable(-1,-1,0,0);
+  	h = 150;
+  	EditFieldTL(h,v+=vs,50,"Pay Mode",M4UStr,Normal,10,DefPayDeal,false,PDSClass);
+  	EditFieldTL(h,v+=vs,50,"Purchase Imvoice Pay Mode",M4UStr,Normal,10,VIDefPayDeal,false,PDSClass);
+  EndWindow;
+
+end;
+
+window BPIImportIVVcIClass:1
+  wtag("language","LIT"), wtag("product","*"), wtag("productcode","*"), wtag("device","computer")
+begin
+  real v;
+  WindowBegin("TAVO - Import Invoices",BPIImportIVVcIClass,CGIcW,RcType);
+  SetWRect(80,80,600,200);
+
+  EndWindow;
+end;
+
+window BPIImportVIVcIClass:1
+  wtag("language","LIT"), wtag("product","*"), wtag("productcode","*"), wtag("device","computer")
+begin
+  real v;
+  WindowBegin("TAVO - Import Invoices",BPIImportVIVcIClass,CGIcW,RcType);
+  SetWRect(80,80,600,200);
+
+  EndWindow;
+end;

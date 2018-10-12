@@ -1,0 +1,25 @@
+SourceFile("halcust/level0",0);
+SourceFile("halcust/level0/Documents",0);
+SourceFile("halcust/level0/Maint",0);
+SourceFile("halcust/level0/Reports",0);
+SourceFile("halcust/level0/Tools",0);
+SourceFile("halcust/level0/WActions",0);
+SourceFile("halcust/Maint",3);
+SourceFile("halcust/Import",3);
+SourceFile("halcust/WActions",3);
+SourceFile("halcust/Windows",3);
+SourceFile("halcust/latvian",3);
+SourceFile("halcust/english",3);
+SourceFile("halcust/Tools",3);
+SourceFile("halcust/RActions",3);
+SourceFile("halcust/Swedbank",3);
+
+begin
+	
+	BlockBegin(CrVIImportSetBlock,-,"");// Edit ************************** BPI Ukraine - KramarAlexandr - Tuesday, 28 August 2018 14:35:53
+		RecordField(DefPayDeal,M4Code,10,0);
+		RecordField(VIDefPayDeal,M4Code,10,0);
+	EndBlock;
+
+return;
+end;
