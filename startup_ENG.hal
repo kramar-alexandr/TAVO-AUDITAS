@@ -6,6 +6,7 @@ begin
   Real h,v,l,vs;
 	
 	Setting("TAVO - Import Credit Invoice Setting",CrVIImportSetTClass,modPL);// Edit ************************** BPI Ukraine - KramarAlexandr - Friday, 12 October 2018 15:57:24
+	Setting("TAVO - Import Credit Invoice Setting",CrVIImportSetTClass,modSL);// Edit ************************** BPI Ukraine - KramarAlexandr - Friday, 12 October 2018 15:57:24
 	Import("TAVO - Import Invoices",BPIImportIVVcIClass,BPIImportIVVcIn,modSL);
 	Import("TAVO - Import Invoices",BPIImportVIVcIClass,BPIImportVIVcIn,modPL);
 

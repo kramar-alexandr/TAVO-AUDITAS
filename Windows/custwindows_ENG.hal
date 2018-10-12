@@ -24,7 +24,9 @@ begin
   real v;
   WindowBegin("TAVO - Import Invoices",BPIImportIVVcIClass,CGIcW,RcType);
   SetWRect(80,80,600,200);
-
+	
+	StaticText(150,50,"Import Invoice in SERP Export/Import format IVVc",false);
+	
   EndWindow;
 end;
 
@@ -34,6 +36,8 @@ begin
   real v;
   WindowBegin("TAVO - Import Invoices",BPIImportVIVcIClass,CGIcW,RcType);
   SetWRect(80,80,600,200);
+
+	StaticText(150,50,"Import Purchase Invoice in SERP Export/Import format VIVc3",false);
 
   EndWindow;
 end;
