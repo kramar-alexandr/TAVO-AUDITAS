@@ -35,6 +35,8 @@ begin
 						end;
 	  			end;
 				end; 
+				ClearRow(IVr,IVrw,kInvoiceRowTypeCredit);
+        MatRowInsert(IVr,0,IVrw);
 				IVSumup(IVr,true);
     	end;
     end;
@@ -61,7 +63,6 @@ begin
 
     RecordNew(VIr);
     ImportOneRecord(VIr,"VIVc3");
-    logtext(0,VIr.PayVal);
     if(VIr.PayVal<0)then begin
     	if(nonblank(CIb.VIDefPayDeal))then begin
     		VIr.PayDeal = CIb.VIDefPayDeal;
