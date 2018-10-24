@@ -18,7 +18,6 @@ begin
 
     RecordNew(IVr);
     ImportOneRecord(IVr,"IVVc");
-    logtext(0,IVr.SerNr);
     if(IVr.Sum4<0)then begin
     	if(nonblank(CIb.DefPayDeal))then begin
     		IVr.PayDeal = CIb.DefPayDeal;
